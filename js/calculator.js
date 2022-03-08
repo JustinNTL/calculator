@@ -21,3 +21,25 @@ const operate = (operator, num1, num2) => {
       break;
   }
 };
+
+const generateDisplay = (e) => {
+  const display = document.querySelector('.outputDisplay');
+  const key = document.querySelector(`button[data-key*="${e.keyCode}"]`);
+  if (!key) return;
+
+  let buttonValue = key.innerText;
+  display.innerText = buttonValue;
+  console.log(key);
+}
+
+const buttons = document.querySelectorAll('buttons');
+buttons.forEach(button => button.addEventListener('click', generateDisplay));
+window.addEventListener('keydown', generateDisplay);
+
+// const setText = () => {
+  
+// }
+// const buttons = document.querySelector('.buttons');
+
+// buttons.addEventListener('click', generateDisplay);
+// buttons.addEventListener('keydown', generateDisplay);
