@@ -21,9 +21,9 @@ const operate = (operator, num1, num2) => {
       break;
   }
 };
+const display = document.querySelector('.outputDisplay');
 
 const generateDisplay = (e) => {
-  const display = document.querySelector('.outputDisplay');
   const key = document.querySelector(`button[data-key*="${e.keyCode}"]`);
   if (!key) return;
 
