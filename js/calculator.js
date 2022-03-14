@@ -1,13 +1,25 @@
-class Calculator {
-  constructor() {
+const currentOutputTextElement = document.querySelector('[data-current-output]');
+const allClearButton = document.querySelector('[data-clear]');
+const percentButton = document.querySelector('[data-percent]');
+const backspaceButton = document.querySelector('[data-backspace]');
+const negateButton = document.querySelector('[data-negate]');
+const equalsButton = document.querySelector('[data-equals]');
+// const availableKeys = document.querySelector(`button[data-key*="${e.keyCode}"]`);
+const operatorButtons = document.querySelectorAll('[data-operator]');
+const operandButtons = document.querySelectorAll('[data-operand]');
 
+class Calculator {
+  constructor(currentOutputTextElement) {
+    this.currentOutputTextElement = currentOutputTextElement;
+    this.clear();
   }
 
   clear() {
-
+    this.currentOutput = '';
+    this.operation = undefined;
   }
 
-  percent(number) {
+  percent() {
 
   }
 
@@ -15,16 +27,16 @@ class Calculator {
 
   }
 
-  operation(operator) {
+  operatorChoice(operator) {
 
   }
 
-  negate(number) {
+  negate() {
 
   }
 
   appendNumber(number) {
-
+    this.currentOutput = this.currentOutput.toString() + number.toString();
   }
 
   compute() {
@@ -32,10 +44,19 @@ class Calculator {
   }
 
   updateDisplay() {
-
+    this.currentOutputTextElement.innerText = this.currentOutput;
   }
 
 }
+
+const calculator = new Calculator(currentOutputTextElement);
+
+operandButtons.forEach(button => {
+  button.addEventListener('click',  () => {
+    calculator.appendNumber(button.innerText);
+    calculator.updateDisplay();
+  })
+})
 
 const add = (num1, num2) => num1 + num2;
 const subtract = (num1, num2) => num1 - num2;
@@ -60,6 +81,7 @@ const operate = (operator, num1, num2) => {
       break;
   }
 };
+
 const display = document.querySelector('.outputDisplay');
 
 const generateDisplay = (e) => {

@@ -14,7 +14,7 @@ body {
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 80px);
-  grid-template-rows: repeat(6, 80px);
+  grid-template-rows: minmax(90px, auto) repeat(5, 80px);
   justify-content: center;
   align-content: center;
   min-height: 100vh;
@@ -42,6 +42,5 @@ body {
   align-items: flex-end;
   padding: 16px;
   font-size: 32px;
-  /* word-wrap: break-word; */
   word-break: break-all;
 }
