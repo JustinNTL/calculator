@@ -22,11 +22,12 @@ class Calculator {
   }
 
   percent() {
-
+    if (this.currentOutput === '') return;
+    this.currentOutput = parseFloat(this.currentOutput) / 100;
   }
 
   backspace() {
-
+    this.currentOutput = this.currentOutput.toString().slice(0, -1);
   }
 
   operatorChoice(operator) {
@@ -44,7 +45,10 @@ class Calculator {
   }
 
   appendNumber(number) {
-    if (number === '.' && this.currentOutput.includes('.')) return;
+    if (number === '.' && this.currentOutput.toString().includes('.')) return;
+    if (this.currentOutput === 'cannot divide by zero') {
+      this.currentOutput = '';
+    }
     this.currentOutput = this.currentOutput.toString() + number.toString();
   }
 
@@ -112,6 +116,16 @@ equalsButton.addEventListener('click', () => {
 
 negateButton.addEventListener('click', () => {
   calculator.negate();
+  calculator.updateDisplay();
+})
+
+backspaceButton.addEventListener('click', () => {
+  calculator.backspace();
+  calculator.updateDisplay();
+})
+
+percentButton.addEventListener('click', () => {
+  calculator.percent();
   calculator.updateDisplay();
 })
 

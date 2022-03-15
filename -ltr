@@ -1,0 +1,59 @@
+[33mcommit b9f591257a350b789ad520a6e389ce9f031322b9[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Mon Mar 14 17:09:31 2022 -0700
+
+    Adjust js logic by adding previous output variable to hold current output and reflect it in the Calculator class, constructor, and methods, Set operatorChoice, compute, and negate functions, Add event listener to equals and negate buttons
+
+[33mcommit 60a61ec2e5324897afff337d103d05c8607657e0[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Sun Mar 13 19:02:26 2022 -0700
+
+    Fix grid-template rows for outputDisplay to fit growing numbers, Set all html elements to variables in js, Start calling calculator class and methods with operand buttons
+
+[33mcommit b70bba39d90c1d2871c7c0582ad182589cc10c3c[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Sun Mar 13 16:05:15 2022 -0700
+
+    Reposition html button elements for intuitivity, Set Calculator class base to streamline and organize js
+
+[33mcommit acde5ae9db23941c99cc9552fb509affab51a51b[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Sun Mar 13 14:42:05 2022 -0700
+
+    Add data attributes to html elements to differentiate from css classes and target in js, Style output display in css
+
+[33mcommit cc75bf0d117c95947c3152ed720206421de3aa94[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Mon Mar 7 19:55:59 2022 -0800
+
+    Remove CE button and change C button to AC to keep calculator simple and symmetrical, Align header and edit button aesthetics and hover animation
+
+[33mcommit 1052b7d008f5e0872ac59126555d6730eaf5ed70[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Mon Mar 7 17:56:44 2022 -0800
+
+    Fix stylesheet link, Reposition buttons, Add base css calculator format, Set generateDisplay function to take in keystrokes and start for click events
+
+[33mcommit 1fd2213f6440a060debdf243a7946f0b4bb86065[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Fri Feb 25 18:21:30 2022 -0800
+
+    Add header, calculator display, digits, operators, keys and corresponding data key numbers to index file, Create operate function to call basic arithmetic functions and take numbers in js
+
+[33mcommit a7d4f4c46bd95bf3a86aa2d0ae26bc40ee81b70f[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Fri Feb 25 15:31:25 2022 -0800
+
+    Link css, js, img logo to index file, Create basic arithmetic functions in js
+
+[33mcommit 2e733a6c0e3e7b3f52433b379352b8ed33767455[m
+Author: Justin <Justin.nthai@gmail.com>
+Date:   Fri Feb 25 15:11:52 2022 -0800
+
+    Set README introduction, Add index file, css, img, js directories and base files/logo img, Lay boilerplate for index file
+
+[33mcommit a950e8610deb29126c11d0c78271d0e6a9e14a34[m
+Author: JustinNTL <47655827+JustinNTL@users.noreply.github.com>
+Date:   Fri Feb 25 14:47:19 2022 -0800
+
+    Initial commit
