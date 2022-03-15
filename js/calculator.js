@@ -1,22 +1,24 @@
 const currentOutputTextElement = document.querySelector('[data-current-output]');
+const previousOutput = '';
 const allClearButton = document.querySelector('[data-clear]');
 const percentButton = document.querySelector('[data-percent]');
 const backspaceButton = document.querySelector('[data-backspace]');
 const negateButton = document.querySelector('[data-negate]');
 const equalsButton = document.querySelector('[data-equals]');
-// const availableKeys = document.querySelector(`button[data-key*="${e.keyCode}"]`);
 const operatorButtons = document.querySelectorAll('[data-operator]');
 const operandButtons = document.querySelectorAll('[data-operand]');
 
 class Calculator {
-  constructor(currentOutputTextElement) {
+  constructor(previousOutput, currentOutputTextElement) {
+    this.previousOutput = previousOutput;
     this.currentOutputTextElement = currentOutputTextElement;
     this.clear();
   }
 
   clear() {
     this.currentOutput = '';
-    this.operation = undefined;
+    this.previousOutput = '';
+    this.operator = undefined;
   }
 
   percent() {
@@ -28,19 +30,52 @@ class Calculator {
   }
 
   operatorChoice(operator) {
-
+    if (this.currentOutput === '') return;
+    if (this.previousOutput !== '') {
+      this.compute();
+    }
+    this.operator = operator;
+    this.previousOutput = this.currentOutput;
+    this.currentOutput = '';
   }
 
   negate() {
-
+    this.currentOutput = -(this.currentOutput);
   }
 
   appendNumber(number) {
+    if (number === '.' && this.currentOutput.includes('.')) return;
     this.currentOutput = this.currentOutput.toString() + number.toString();
   }
 
   compute() {
-
+    let computation;
+    const prev = parseFloat(this.previousOutput);
+    const current = parseFloat(this.currentOutput);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (this.operator) {
+      case '+':
+        computation = prev + current;
+        break;
+      case '-':  
+        computation = prev - current;
+        break;
+      case '×': 
+        computation = prev * current;
+        break;
+      case '÷':
+        if (current === 0) {
+          computation = 'cannot divide by zero';
+        } else {
+          computation = prev / current;
+        }
+        break;
+      default:
+        return;
+    }
+    this.currentOutput = computation;
+    this.operator = undefined;
+    this.previousOutput = '';
   }
 
   updateDisplay() {
@@ -49,53 +84,50 @@ class Calculator {
 
 }
 
-const calculator = new Calculator(currentOutputTextElement);
+const calculator = new Calculator(previousOutput, currentOutputTextElement);
 
 operandButtons.forEach(button => {
-  button.addEventListener('click',  () => {
+  button.addEventListener('click', () => {
     calculator.appendNumber(button.innerText);
     calculator.updateDisplay();
   })
 })
 
-const add = (num1, num2) => num1 + num2;
-const subtract = (num1, num2) => num1 - num2;
-const multiply = (num1, num2) => num1 * num2;
-const divide = (num1, num2) => num1 / num2;
+operatorButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    calculator.operatorChoice(button.innerText);
+    calculator.updateDisplay();
+  })
+})
 
-const operate = (operator, num1, num2) => {
-  // if operator = a/s/m/d call function, probably pop a reduction method to 
-  // receive infinite number of digits
-  switch (operator) {
-    case add:
-      return add(num1, num2);
-      break;
-    case subtract:  
-      return subtract(num1, num2);
-      break;
-    case multiply: 
-      return multiply(num1, num2);
-      break;
-    case divide:
-      return divide(num1, num2);
-      break;
-  }
-};
+allClearButton.addEventListener('click', () => {
+    calculator.clear();
+    calculator.updateDisplay();
+  })
 
-const display = document.querySelector('.outputDisplay');
+equalsButton.addEventListener('click', () => {
+  calculator.compute();
+  calculator.updateDisplay();
+})
 
-const generateDisplay = (e) => {
-  const key = document.querySelector(`button[data-key*="${e.keyCode}"]`);
-  if (!key) return;
+negateButton.addEventListener('click', () => {
+  calculator.negate();
+  calculator.updateDisplay();
+})
 
-  let buttonValue = key.innerText;
-  display.innerText = buttonValue;
-  console.log(key);
-}
+// const generateDisplay = (e) => {
+//   const key = document.querySelector(`button[data-key*="${e.keyCode}"]`);
+//   if (!key) return;
 
-const buttons = document.querySelectorAll('buttons');
-buttons.forEach(button => button.addEventListener('click', generateDisplay));
-window.addEventListener('keydown', generateDisplay);
+//   let buttonValue = key.innerText;
+//   display.innerText = buttonValue;
+//   console.log(key);
+// }
+
+// window.addEventListener('keydown', generateDisplay);
+
+// const buttons = document.querySelectorAll('buttons');
+// buttons.forEach(button => button.addEventListener('click', generateDisplay));
 
 // const setText = () => {
   
