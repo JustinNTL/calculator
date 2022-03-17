@@ -49,6 +49,9 @@ class Calculator {
     if (this.currentOutput === 'cannot divide by zero') {
       this.currentOutput = '';
     }
+    if (typeof(this.currentOutput) === 'number') {
+      this.currentOutput = '';
+    }
     this.currentOutput = this.currentOutput.toString() + number.toString();
   }
 
@@ -100,7 +103,6 @@ operandButtons.forEach(button => {
 operatorButtons.forEach(button => {
   button.addEventListener('click', () => {
     calculator.operatorChoice(button.innerText);
-    calculator.updateDisplay();
   })
 })
 
