@@ -84,9 +84,29 @@ class Calculator {
     this.operator = undefined;
     this.previousOutput = '';
   }
+  
+  formatNumber(number) {
+    const stringNumber = number.toString();
+    const integerPart = parseFloat(stringNumber.split('.')[0]);
+    const decimalPart = stringNumber.split('.')[1];
+    let displayNumber;
+
+    if (isNaN(integerPart)) {
+      displayNumber = '';
+    } else {
+      displayNumber = integerPart.toLocaleString('en', {
+        maximumFractionDigits: 0
+      })
+    }
+    if (decimalPart != null) {
+      return `${displayNumber}.${decimalPart}`;
+    } else {
+      return displayNumber;
+    }
+  }
 
   updateDisplay() {
-    this.currentOutputTextElement.innerText = this.currentOutput;
+    this.currentOutputTextElement.innerText = this.formatNumber(this.currentOutput);
   }
 
 }
@@ -107,9 +127,9 @@ operatorButtons.forEach(button => {
 })
 
 allClearButton.addEventListener('click', () => {
-    calculator.clear();
-    calculator.updateDisplay();
-  })
+  calculator.clear();
+  calculator.updateDisplay();
+})
 
 equalsButton.addEventListener('click', () => {
   calculator.compute();
@@ -131,16 +151,40 @@ percentButton.addEventListener('click', () => {
   calculator.updateDisplay();
 })
 
-// const generateDisplay = (e) => {
+// Revisions and thoughts on keyboard support below...introduces problems.
+// E.g. 'Enter' key duplicates previously entered digit, but doesn't when clicked
+// outside of the calculator--makes it more difficult to use dev tools to track,
+// and it bypasses the !key check. Keyboard support for operatorChoice breaks append, etc.
+
+// const operandKBSupport = (e) => {
+//   const key = document.querySelector(`button[data-operand][data-key*="${e.keyCode}"]`);
+//   if (!key) return;
+  
+//   calculator.appendNumber(key.innerText);
+//   calculator.updateDisplay();
+// }
+
+// window.addEventListener('keydown', operandKBSupport);
+
+// const operandKBSupport = (e) => {
+//   const key = document.querySelector(`button[data-key*="${e.keyCode}"]`);
+//   if (!key) return;
+  
+//   calculator.appendNumber(key.innerText);
+//   calculator.updateDisplay();
+// }
+
+// const operatorKBSupport = (e) => {
 //   const key = document.querySelector(`button[data-key*="${e.keyCode}"]`);
 //   if (!key) return;
 
-//   let buttonValue = key.innerText;
-//   display.innerText = buttonValue;
-//   console.log(key);
+//   calculator.operatorChoice(key.innerText);
 // }
 
-// window.addEventListener('keydown', generateDisplay);
+// window.addEventListener('keydown', (e) => {
+//   operandKBSupport(e);
+//   operatorKBSupport(e);
+// });
 
 // const buttons = document.querySelectorAll('buttons');
 // buttons.forEach(button => button.addEventListener('click', generateDisplay));
