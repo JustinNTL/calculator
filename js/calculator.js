@@ -91,7 +91,9 @@ class Calculator {
     const decimalPart = stringNumber.split('.')[1];
     let displayNumber;
 
-    if (isNaN(integerPart)) {
+    if (stringNumber === 'cannot divide by zero') {
+      return displayNumber = stringNumber;
+    } else if (isNaN(integerPart)) {
       displayNumber = '';
     } else {
       displayNumber = integerPart.toLocaleString('en', {
