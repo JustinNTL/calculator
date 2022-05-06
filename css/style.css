@@ -15,6 +15,7 @@ h1 {
   background: linear-gradient(to left, rgb(205, 0, 160), rgb(255, 145, 0));
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .calculator {
